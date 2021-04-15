@@ -1,6 +1,6 @@
 ; (function (context) {
   if (!localStorage.getItem('token')) {
-    window.location.replace('http://localhost:3000/register/login')
+    window.location.replace(`${window.location.origin}/register/login`)
   }
   'use strict';
 

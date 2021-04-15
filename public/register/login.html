@@ -11,14 +11,6 @@
 
 <body>
 
-    <!-- <form id="signin">
-        <label for="email"> Email:</label>
-        <input type="text" id="email">
-        <label for="password">Password:</label>
-        <input type="password" id="password">
-        <button type="submit" id="submit">Submit</button>
-    </form> -->
-
     <section class="main">
         <div class="form_wrapper">
             <input type="radio" class="radio" name="radio" id="login" checked />
@@ -76,18 +68,18 @@
     </section>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-
+        let host = window.location.origin
         document.querySelector('#submitLogin').addEventListener('click', () => {
             let email, password
             email = document.querySelector('#loginEmail').value
             password = document.querySelector('#loginPass').value
-            let url = 'http://localhost:3000/users/login'
+            let url = `${host}/users/login`
             axios.post(url, { email, password }).then((res) => {
                 console.log(res)
                 let authToken = res.headers["x-auth"]
                 if (authToken) {
                     localStorage.setItem('token', authToken)
-                    window.location.href = 'http://localhost:3000'
+                    window.location.href = host
                 }
             })
 
@@ -100,13 +92,13 @@
             passConfirm = document.querySelector('#passConfirm').value
             email = document.querySelector('#signupEmail').value
             password = document.querySelector('#signupPass').value
-            let url = 'http://localhost:3000/users'
+            let url = `${host}/users`
             if (password === passConfirm) {
                 axios.post(url, { email, password }).then((res) => {
                     let authToken = res.headers["x-auth"]
                     if (authToken) {
                         localStorage.setItem('token', authToken)
-                        window.location.href = 'http://localhost:3000'
+                        window.location.href = host
                     }
                 })
             }

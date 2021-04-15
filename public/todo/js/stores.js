@@ -23,7 +23,7 @@
   let num = 0
   Stores.fn.findAll = function (cb) {
     let todos;
-    axios.get('http://localhost:3000/todos', {
+    axios.get(`${window.location.origin}/todos`, {
       headers: {
         ['x-auth']: localStorage.getItem('token')
       }
@@ -49,7 +49,7 @@
             for (var prop in item) {
               x[prop] = item[prop];
             }
-            axios.patch(`http://localhost:3000/todos/${x._id}`, { text: x.text, completed: x.completed })
+            axios.patch(`${window.location.origin}/todos/${x._id}`, { text: x.text, completed: x.completed })
               .then(re => console.log(re))
           }
           return x;
@@ -72,7 +72,7 @@
     let deletedItem = await items.filter(item => item.id === id)[0]
     await console.log(items)
     await console.log(deletedItem)
-    axios.delete(`http://localhost:3000/todos/${deletedItem._id}`, {
+    axios.delete(`${window.location.origin}/todos/${deletedItem._id}`, {
       headers: {
         ['x-auth']: localStorage.getItem('token')
       }

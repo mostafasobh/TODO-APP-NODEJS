@@ -113,7 +113,7 @@
       let token = localStorage.getItem('token')
       if (token) {
         //page wont load unless there is token and token won't be saved unless its saved in mongodb
-        axios.post('http://localhost:3000/todos', { text }, {
+        axios.post(`${window.location.origin}/todos`, { text }, {
           headers: {
             ['x-auth']: token
           }
