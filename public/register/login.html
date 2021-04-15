@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login</title>
+</head>
+
+<body>
+
+    <!-- <form id="signin">
+        <label for="email"> Email:</label>
+        <input type="text" id="email">
+        <label for="password">Password:</label>
+        <input type="password" id="password">
+        <button type="submit" id="submit">Submit</button>
+    </form> -->
+
+    <section class="main">
+        <div class="form_wrapper">
+            <input type="radio" class="radio" name="radio" id="login" checked />
+            <input type="radio" class="radio" name="radio" id="signup" />
+            <div class="tile">
+                <h3 class="login">Login Form</h3>
+                <h3 class="signup">Signup Form</h3>
+            </div>
+
+            <label class="tab login_tab" for="login">
+                Login
+            </label>
+
+            <label class="tab signup_tab" for="signup">
+                Signup
+            </label>
+            <span class="shape"></span>
+            <div class="form_wrap">
+                <div class="form_fild login_form">
+                    <div class="input_group">
+                        <input type="email" class="input" placeholder="Email Address" id="loginEmail" />
+                    </div>
+                    <div class="input_group">
+                        <input type="password" class="input" placeholder="Password" id="loginPass" />
+                    </div>
+
+                    <a href="#forgot" class="forgot">Forgot password?</a>
+
+                    <input type="submit" class="btn" value="Login" id="submitLogin" />
+
+                    <div class="not_mem">
+                        <label for="signup">Not a member? <span> Signup now</span></label>
+                    </div>
+
+                </div>
+
+                <div class="form_fild signup_form">
+                    <div class="input_group">
+                        <input type="email" class="input" placeholder="Email Address" id="signupEmail" />
+                    </div>
+                    <div class="input_group">
+                        <input type="password" class="input" placeholder="Password" id="signupPass" />
+                    </div>
+
+                    <div class="input_group">
+                        <input type="password" class="input" placeholder="Confirm Password" id="passConfirm" />
+                    </div>
+
+                    <input type="submit" class="btn" value="Signup" />
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        document.querySelector('#submitLogin').addEventListener('click', () => {
+            let email, password
+            email = document.querySelector('#loginEmail').value
+            password = document.querySelector('#loginPass').value
+            let url = 'http://localhost:3000/users/login'
+            axios.post(url, { email, password }).then((res) => {
+                console.log(res)
+                let authToken = res.headers["x-auth"]
+                if (authToken) {
+                    localStorage.setItem('token', authToken)
+                    window.location.href = 'http://localhost:3000'
+                }
+            })
+
+        })
+    </script>
+    <script>
+
+        document.querySelector('input[value="Signup"]').addEventListener('click', () => {
+            let email, password, passConfirm
+            passConfirm = document.querySelector('#passConfirm').value
+            email = document.querySelector('#signupEmail').value
+            password = document.querySelector('#signupPass').value
+            let url = 'http://localhost:3000/users'
+            if (password === passConfirm) {
+                axios.post(url, { email, password }).then((res) => {
+                    let authToken = res.headers["x-auth"]
+                    if (authToken) {
+                        localStorage.setItem('token', authToken)
+                        window.location.href = 'http://localhost:3000'
+                    }
+                })
+            }
+
+        })
+    </script>
+</body>
+
+</html>
