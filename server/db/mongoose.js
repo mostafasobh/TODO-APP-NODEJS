@@ -1,9 +1,10 @@
 // const url = 'mongodb://localhost:27017/'
 const pass = process.env.DB_PASSWORD
-const dbName = 'TodoApp'
+const dbName = process.env.DB_NAME
+const username = process.env.DB_USERNAME
 const mongoose = require('mongoose');
 const db = mongoose.connection
-const url = `mongodb+srv://todoAppDB:${pass}@cluster0.qzpgn.mongodb.net/TodoApp?retryWrites=true&w=majority`
+const url = `mongodb+srv://${username}:${pass}@cluster0.6b2nn.mongodb.net/${dbName}?retryWrites=true&w=majority`
 // mongoose.Promise = global.Promise
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, });
 
